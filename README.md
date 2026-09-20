@@ -1,46 +1,56 @@
 # PhishGuard – Phishing Detection Using Deep Learning
 
-PhishGuard is an academic deep learning project focused on detecting and classifying phishing-related content. The project explores how machine learning and neural-network techniques can be applied to identify potentially malicious URLs or messages.
+PhishGuard is an academic cybersecurity and deep learning project designed to analyze URLs and classify them as potentially phishing or likely legitimate.
+
+The project demonstrates how URL-based lexical features can be extracted and processed using a neural-network classification model.
 
 ## Project Objective
 
-The objective of PhishGuard is to develop a classification-based approach that can distinguish between legitimate and potentially phishing content using features extracted from the input data.
+The objective of PhishGuard is to develop a machine-learning-based approach for identifying potentially malicious URLs.
 
-## Key Features
+The project covers:
 
-- Phishing data preprocessing
-- Feature extraction and preparation
-- Deep learning-based classification
-- Model training and evaluation
-- Performance analysis using classification metrics
-- Focus on practical cybersecurity applications
+- URL feature extraction
+- Dataset preprocessing
+- Feature scaling
+- Neural-network model training
+- Model evaluation
+- Phishing probability prediction
+
+## Features
+
+- Extracts lexical characteristics from URLs
+- Detects potentially suspicious URL patterns
+- Uses a neural-network classifier
+- Supports training and evaluation using a CSV dataset
+- Saves the trained model for later predictions
+- Saves the feature scaler used during training
+- Provides a command-line prediction interface
 
 ## Technologies Used
 
 - Python
-- Deep Learning
-- Machine Learning
-- Neural Networks
+- TensorFlow / Keras
+- Scikit-learn
 - Pandas
 - NumPy
-- Scikit-learn
-- TensorFlow / Keras
+- Matplotlib
+- Seaborn
+- Joblib
 
-## Project Workflow
+## Project Structure
 
 ```text
-Dataset
-   ↓
-Data Preprocessing
-   ↓
-Feature Extraction
-   ↓
-Train / Test Split
-   ↓
-Deep Learning Model
-   ↓
-Model Training
-   ↓
-Evaluation
-   ↓
-Phishing / Legitimate Classification
+phishguard-deep-learning/
+│
+├── dataset/
+│   └── README.md
+│
+├── .gitignore
+├── README.md
+├── data_loader.py
+├── model_utils.py
+├── phishguard.py
+├── predict.py
+├── requirements.txt
+└── train_model.py
