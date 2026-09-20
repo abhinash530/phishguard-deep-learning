@@ -1,35 +1,31 @@
-# PhishGuard – Phishing Detection Using Deep Learning
+# PhishGuard - Deep Learning Based Phishing URL Detection
 
-PhishGuard is an academic cybersecurity and deep learning project designed to analyze URLs and classify them as potentially phishing or likely legitimate.
+PhishGuard is a cybersecurity machine learning project that detects potentially
+phishing URLs using URL-based feature extraction and a deep learning
+classification model.
 
-The project demonstrates how URL-based lexical features can be extracted and processed using a neural-network classification model.
+The system analyzes characteristics of a URL such as its length, number of
+dots, hyphens, slashes, digits, special characters, HTTPS usage, and whether
+the URL contains an IP address.
+
+---
 
 ## Project Objective
 
-The objective of PhishGuard is to develop a machine-learning-based approach for identifying potentially malicious URLs.
+The objective of PhishGuard is to build a lightweight URL-based phishing
+detection system that can classify URLs as:
 
-The project covers:
+- `0` - Legitimate
+- `1` - Phishing
 
-- URL feature extraction
-- Dataset preprocessing
-- Feature scaling
-- Neural-network model training
-- Model evaluation
-- Phishing probability prediction
+The project demonstrates the application of Python, machine learning,
+deep learning, and cybersecurity concepts to phishing URL detection.
 
-## Features
-
-- Extracts lexical characteristics from URLs
-- Detects potentially suspicious URL patterns
-- Uses a neural-network classifier
-- Supports training and evaluation using a CSV dataset
-- Saves the trained model for later predictions
-- Saves the feature scaler used during training
-- Provides a command-line prediction interface
+---
 
 ## Technologies Used
 
-- Python
+- Python 3.11
 - TensorFlow / Keras
 - Scikit-learn
 - Pandas
@@ -37,6 +33,31 @@ The project covers:
 - Matplotlib
 - Seaborn
 - Joblib
+- Git & GitHub
+
+---
+
+## Dataset
+
+PhishGuard uses the **PhiUSIIL Phishing URL (Website) Dataset** from the
+UCI Machine Learning Repository.
+
+The dataset contains 235,795 URL records.
+
+For this project, the original dataset labels were converted to the
+following convention:
+
+- `0` = Legitimate
+- `1` = Phishing
+
+The dataset is downloaded locally using `download_dataset.py` and is not
+stored directly in this GitHub repository because of its size.
+
+Dataset source:
+
+https://archive.ics.uci.edu/dataset/967/phiusiil+phishing+url+dataset
+
+---
 
 ## Project Structure
 
@@ -49,6 +70,7 @@ phishguard-deep-learning/
 ├── .gitignore
 ├── README.md
 ├── data_loader.py
+├── download_dataset.py
 ├── model_utils.py
 ├── phishguard.py
 ├── predict.py
