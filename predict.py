@@ -1,31 +1,31 @@
 """
 PhishGuard - URL Prediction
 
-Loads a trained PhishGuard model and predicts whether
-a URL is potentially phishing or likely legitimate.
+Loads the trained PhishGuard model and the fitted feature
+scaler, then predicts whether a URL is potentially phishing.
 """
 
 import os
-import numpy as np
 import pandas as pd
-
-from sklearn.preprocessing import StandardScaler
 from tensorflow.keras.models import load_model
 
 from phishguard import extract_features
+from model_utils import load_scaler
 
 
 MODEL_PATH = "models/phishguard_model.keras"
 
 
 def predict_url(url, model, scaler):
-    """Predict the classification of a URL."""
+    """Predict whether a URL is legitimate or phishing."""
 
     features = pd.DataFrame(
         [extract_features(url)]
     )
 
-    features_scaled = scaler.transform(features)
+    features_scaled = scaler.transform(
+        features
+    )
 
     probability = float(
         model.predict(
@@ -45,20 +45,29 @@ def predict_url(url, model, scaler):
 def main():
 
     if not os.path.exists(MODEL_PATH):
-        print("Trained model not found.")
+        print("\nTrained model not found.")
         print(
-            "Train the model first using "
+            "Please train the model first using "
             "train_model.py."
         )
         return
 
-    model = load_model(MODEL_PATH)
+    try:
+        model = load_model(
+            MODEL_PATH
+        )
 
-    # The scaler should be fitted using the same
-    # training data used by the model.
-    print(
-        "Model loaded successfully."
-    )
+        scaler = load_scaler()
+
+    except Exception as error:
+        print(
+            f"\nError loading model or scaler: {error}"
+        )
+        return
+
+    print("\n================================")
+    print("       PhishGuard Scanner")
+    print("================================")
 
     url = input(
         "\nEnter a URL to analyze: "
@@ -68,17 +77,18 @@ def main():
         print("No URL entered.")
         return
 
-    # For a production implementation, load the scaler
-    # saved during training instead of fitting it here.
-    print(
-        "\nURL received for analysis:"
+    prediction, probability = predict_url(
+        url,
+        model,
+        scaler
     )
-    print(url)
 
+    print("\n========== Result ==========")
+    print(f"URL: {url}")
+    print(f"Prediction: {prediction}")
     print(
-        "\nNote: The prediction pipeline requires "
-        "the training scaler to be saved and loaded "
-        "alongside the model."
+        f"Phishing Probability: "
+        f"{probability:.2%}"
     )
 
 
